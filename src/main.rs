@@ -28,7 +28,7 @@ fn main() {
         } else if first_command == "All" {
             let keys: Vec<String> = organization.keys().cloned().collect();
             for key in keys {
-                let values = organization.get_mut(&key).unwrap();
+                let values = organization.get_mut(&key).expect("No such organization");
                 values.sort();
                 println!("{}:", key);
                 for value in values {
@@ -38,7 +38,9 @@ fn main() {
         } else if first_command == "Exit" {
             break;
         } else {
-            let values = organization.get_mut(first_command).unwrap();
+            let values = organization
+                .get_mut(first_command)
+                .expect("No such organization");
             values.sort();
             println!("{}:", first_command);
             for value in values {
